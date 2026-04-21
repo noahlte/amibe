@@ -7,7 +7,6 @@ public class CellSteering : MonoBehaviour
     [SerializeField] private float xIncrement = 0.2f;
     [SerializeField] private float yIncrement = 0.1f;
 
-    // Vector variable
     private Vector3 velocity;
     private Vector3 acceleration;
 
@@ -15,6 +14,8 @@ public class CellSteering : MonoBehaviour
     private float yoff1;
     private float xoff2;
     private float yoff2;
+
+    private bool isSeeking = true;
 
     void Start()
     {
@@ -32,14 +33,25 @@ public class CellSteering : MonoBehaviour
     {
         CheckEdges();
 
-        float xDirection = Mathf.PerlinNoise(xoff1, yoff1);
-        float yDirection = Mathf.PerlinNoise(xoff2, yoff2);
+        if (isSeeking)
+        {
+            SeekSteering();
+        }
 
-        xDirection = Utils.Map(xDirection, 0f, 1f, -1f, 1f);
-        yDirection = Utils.Map(yDirection, 0f, 1f, -1f, 1f);
+        (xoff1, yoff1) = IncrementOffset(xoff1, yoff1);
+        (xoff2, yoff2) = IncrementOffset(xoff2, yoff2);
+    }
 
-        acceleration = new Vector3(xDirection, yDirection, 0);
-        velocity += acceleration;
+    public void SteerTo(Vector3 target)
+    {
+        Vector3 direction = target - transform.position;
+        direction.Normalize();
+        MoveCell(direction);
+    }
+
+    private void MoveCell(Vector3 direction)
+    {
+        velocity += direction;
         
         if (velocity.magnitude > topSpeed)
         {
@@ -48,9 +60,6 @@ public class CellSteering : MonoBehaviour
         }
 
         transform.position += velocity * Time.deltaTime;
-
-        (xoff1, yoff1) = IncrementOffset(xoff1, yoff1);
-        (xoff2, yoff2) = IncrementOffset(xoff2, yoff2);
     }
 
     private void CheckEdges()
@@ -67,5 +76,28 @@ public class CellSteering : MonoBehaviour
         yoff += yIncrement;
 
         return (xoff, yoff);
+    }
+
+    private void SeekSteering()
+    {
+        float xDirection = Mathf.PerlinNoise(xoff1, yoff1);
+        float yDirection = Mathf.PerlinNoise(xoff2, yoff2);
+
+        xDirection = Utils.Map(xDirection, 0f, 1f, -1f, 1f);
+        yDirection = Utils.Map(yDirection, 0f, 1f, -1f, 1f);
+
+        acceleration = new Vector3(xDirection, yDirection, 0);
+        
+        MoveCell(acceleration);
+    }
+
+    public void StopSeeking()
+    {
+        isSeeking = false;
+    }
+
+    public void StartSeeking()
+    {
+        isSeeking = true;
     }
 }
