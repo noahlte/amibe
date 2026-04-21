@@ -8,6 +8,7 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private GameObject foodPrefab;
 
     private float timer = 0f;
+    private int currentFood;
 
     void Start()
     {
@@ -17,8 +18,29 @@ public class FoodManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (currentFood < maxFood)
+        {
+            timer += Time.deltaTime;
+            if (timer >= spawnRate)
+            {
+                SpawnFood();
+                timer = 0f;
+            }
+        }
+
+        Debug.Log(currentFood);
+    }
+
     private void SpawnFood()
     {
         Instantiate(foodPrefab, new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0), Quaternion.identity);
+        currentFood++;
+    }
+
+    public void ChangeCurrentFood(int amount)
+    {
+        currentFood += amount;
     }
 }

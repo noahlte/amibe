@@ -68,10 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95906bf31a77df841bef49385b571f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellCore
-  lifetime: 15
   hunger: 100
-  hungerLoss: 1
-  seekRadius: 0.6
+  hungerLossPerSecond: 1
+  maxHunger: 100
+  seekRadius: 0.4
   seekRadiusTrigger: {fileID: 5406736801938393121}
   collision: {fileID: 1015884399159026622}
 --- !u!114 &1346838195088075259

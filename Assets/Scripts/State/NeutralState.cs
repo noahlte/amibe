@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class NeutralState : MonoBehaviour
 {
+    private FoodManager fm;
     private CellSteering cs;
     private CellCore cc;
 
@@ -9,6 +10,7 @@ public class NeutralState : MonoBehaviour
     {
         cs = gameObject.GetComponent<CellSteering>();
         cc = gameObject.GetComponent<CellCore>();
+        fm = GameObject.FindGameObjectWithTag("FoodManager").GetComponent<FoodManager>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -32,8 +34,9 @@ public class NeutralState : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Food"))
         {
-            cc.Eat(10);
+            cc.Eat(2);
             Destroy(collision.gameObject);
+            fm.ChangeCurrentFood(-1);
         }
     }
 }
