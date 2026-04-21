@@ -1,10 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CellCore : MonoBehaviour
 {
     [Header("Cell Life")]
-    [SerializeField] private float hunger = 100f;
+    [SerializeField] private float hunger;
     [SerializeField] private float hungerLossPerSecond = 1f;
+    [SerializeField] private float maxHunger = 100f;
 
     [Header("Cell Seeking")]
     [SerializeField] private float seekRadius = 0.6f;
@@ -22,6 +24,8 @@ public class CellCore : MonoBehaviour
 
         collision.radius = cellRenderer.GetMinRadius();
         seekRadiusTrigger.radius = seekRadius;
+
+        hunger = maxHunger;
     }
 
     void Update()
@@ -37,14 +41,21 @@ public class CellCore : MonoBehaviour
     private void HungerLoss()
     {
         hunger -= hungerLossPerSecond * Time.deltaTime;
-        if (hunger <= 0)
-        {
-            isDead = true;
-        }
+        if (hunger <= 0) isDead = true;
     }
 
     public void Eat(int amount)
     {
         hunger += amount;
+    }
+
+    public float GetHunger()
+    {
+        return hunger;
+    }
+
+    public float GetMaxHunger()
+    {
+        return maxHunger;
     }
 }
