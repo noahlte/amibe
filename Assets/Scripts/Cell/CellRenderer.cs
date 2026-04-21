@@ -6,8 +6,8 @@ public class CellRenderer : MonoBehaviour
 
     [Header("Circle Size")]
     [SerializeField] private int numberOfPoints = 15;
-    [SerializeField] private float radius = 5f;
-    [SerializeField] private float minRadius = 2f;
+    [SerializeField] private float radius = 0.2f;
+    [SerializeField] private float minRadius = 0.05f;
 
     // Perlin noise variable
 
@@ -21,7 +21,7 @@ public class CellRenderer : MonoBehaviour
 
     // Points
     private Vector2[] points;
-
+    
     private LineRenderer lr;
 
     void Start()
@@ -77,5 +77,10 @@ public class CellRenderer : MonoBehaviour
         yoff = startingYoff;
 
         return tempPoints;
+    }
+
+    public float GetMinRadius()
+    {
+        return minRadius;
     }
 }
