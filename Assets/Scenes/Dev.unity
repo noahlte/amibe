@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 269067849}
   m_Layer: 0
   m_Name: FoodManager
-  m_TagString: Untagged
+  m_TagString: FoodManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -658,10 +658,6 @@ PrefabInstance:
     - target: {fileID: 5825782421694466700, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
       propertyPath: m_Name
       value: Cell
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907657618854597937, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
-      propertyPath: seekRadius
-      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7814491380478934977, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
       propertyPath: m_LocalPosition.x

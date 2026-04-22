@@ -6,8 +6,8 @@ public class CellRenderer : MonoBehaviour
 
     [Header("Circle Size")]
     [SerializeField] private int numberOfPoints = 15;
-    [SerializeField] private float radius = 0.2f;
-    [SerializeField] private float minRadius = 0.05f;
+    private float radius;
+    private float minRadius = 0.05f;
 
     // Perlin noise variable
 
@@ -23,9 +23,13 @@ public class CellRenderer : MonoBehaviour
     private Vector2[] points;
     
     private LineRenderer lr;
+    private CellCore cc;
 
     void Start()
     {
+        cc = gameObject.GetComponent<CellCore>();
+        radius = Random.Range(cc.minRadius, cc.maxRadius);
+
         lr = gameObject.GetComponent<LineRenderer>();
         lr.positionCount = numberOfPoints;
 

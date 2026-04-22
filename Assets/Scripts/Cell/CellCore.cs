@@ -1,8 +1,11 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CellCore : MonoBehaviour
 {
+    [Header("Cell Size")]
+    [SerializeField] public float maxRadius = 0.3f;
+    [SerializeField] public float minRadius = 0.2f;
+
     [Header("Cell Life")]
     [SerializeField] private float hunger;
     [SerializeField] private float hungerLossPerSecond = 1f;
@@ -15,14 +18,11 @@ public class CellCore : MonoBehaviour
     [Header("Cell Collision")]
     [SerializeField] private CircleCollider2D collision;
 
-    private CellRenderer cellRenderer;
     private bool isDead;
 
     void Start()
     {
-        cellRenderer = gameObject.GetComponent<CellRenderer>();
-
-        collision.radius = cellRenderer.GetMinRadius();
+        collision.radius = minRadius;
         seekRadiusTrigger.radius = seekRadius;
 
         hunger = maxHunger;
