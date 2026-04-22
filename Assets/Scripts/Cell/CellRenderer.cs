@@ -62,12 +62,10 @@ public class CellRenderer : MonoBehaviour
 
         for (int i = 0; i < numberOfPoints; i++)
         {
-            // Calcul des coordonnées polaires
             float pointAngle = ((float)i / (float)numberOfPoints) * (2 * Mathf.PI);
             float distance = Mathf.PerlinNoise(xoff, yoff);
             distance = Utils.Map(distance, 0f, 1f, minRadius, radius);
 
-            // Conversion en X et Y
             float x = transform.position.x + (distance * Mathf.Cos(pointAngle));
             float y = transform.position.y + (distance * Mathf.Sin(pointAngle));
 
@@ -81,10 +79,5 @@ public class CellRenderer : MonoBehaviour
         yoff = startingYoff;
 
         return tempPoints;
-    }
-
-    public float GetMinRadius()
-    {
-        return minRadius;
     }
 }
