@@ -15,11 +15,17 @@ public class CellManager : MonoBehaviour
         }
     }
 
-    private void SpawnCell(Vector3 position)
+    public void SpawnCell(Vector3 position, float hungerToSet = 0f)
     {
         GameObject newCell = Instantiate(cell, position, Quaternion.identity);
-        newCell.AddComponent<NeutralState>();
+        newCell.AddComponent<HerbivorState>();
         newCell.transform.parent = gameObject.transform;
+
+        if (hungerToSet != 0)
+        {
+            newCell.GetComponent<CellCore>().SetHunger(hungerToSet);
+        }
+
         cellCount++;
         Debug.Log($"Spawn new cell : {newCell.name} | Number : {cellCount}");
     }

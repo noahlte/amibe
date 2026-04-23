@@ -83,4 +83,9 @@ public class CellRenderer : MonoBehaviour
 
         return tempPoints;
     }
+
+    public float GetRadius()
+    {
+        return radius;
+    }
 }

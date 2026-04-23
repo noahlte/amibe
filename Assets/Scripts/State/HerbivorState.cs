@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NeutralState : MonoBehaviour
+public class HerbivorState : MonoBehaviour
 {
     private FoodManager fm;
     private CellSteering cs;
@@ -17,7 +17,7 @@ public class NeutralState : MonoBehaviour
 
     private void Start()
     {
-        fm = GameObject.FindGameObjectWithTag("FoodManager").GetComponent<FoodManager>();
+        fm = FindAnyObjectByType<FoodManager>();
     }
 
     private void Update()
@@ -32,7 +32,6 @@ public class NeutralState : MonoBehaviour
     {
         if (collision.CompareTag("Food") && !hasTarget)
         {
-            Debug.Log($"{gameObject.name} has found food");
             cs.StopSeeking();
             hasTarget = true;
             targetPosition = collision.transform.position;
@@ -43,7 +42,6 @@ public class NeutralState : MonoBehaviour
     {
         if (other.CompareTag("Food") && hasTarget)
         {
-            Debug.Log($"{gameObject.name} has lost food");
             hasTarget = false;
             cs.StartSeeking();
         }
@@ -56,8 +54,7 @@ public class NeutralState : MonoBehaviour
             cc.Eat(2);
             Destroy(collision.gameObject);
             fm.ChangeCurrentFood(-1);
-            hasTarget = false;
-            Debug.Log($"{gameObject.name} has eat food");
+            //hasTarget = false;
         }
     }
 }

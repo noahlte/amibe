@@ -58,4 +58,9 @@ public class CellCore : MonoBehaviour
     {
         return maxHunger;
     }
+
+    public void SetHunger(float amount)
+    {
+        hunger = amount;
+    }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7727798084024861864}
   - component: {fileID: 6907657618854597937}
   - component: {fileID: 1346838195088075259}
+  - component: {fileID: 7666244006777401408}
   - component: {fileID: 1657589920146957846}
   - component: {fileID: 1015884399159026622}
   - component: {fileID: 5406736801938393121}
@@ -68,7 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CellCore
   maxRadius: 0.3
   minRadius: 0.2
-  hunger: 100
   hungerLossPerSecond: 2
   maxHunger: 100
   seekRadius: 0.6
@@ -89,6 +89,21 @@ MonoBehaviour:
   topSpeed: 1.5
   xIncrement: 0.001
   yIncrement: 0.002
+--- !u!114 &7666244006777401408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825782421694466700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1480d95e3aa06c5408284c34543f7e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CellDivision
+  minTimeBeforeDivision: 10
+  maxTimeBeforeDivision: 20
+  hungerForDivision: 100
 --- !u!120 &1657589920146957846
 LineRenderer:
   serializedVersion: 3
