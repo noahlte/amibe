@@ -30,7 +30,7 @@ public class HerbivorState : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Food") && !hasTarget)
+        if (collision.TryGetComponent(out FoodCore fc) && !hasTarget)
         {
             cs.StopSeeking();
             hasTarget = true;
@@ -40,7 +40,7 @@ public class HerbivorState : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (other.CompareTag("Food") && hasTarget)
+        if (other.TryGetComponent(out FoodCore fc) && hasTarget)
         {
             hasTarget = false;
             cs.StartSeeking();
@@ -49,9 +49,9 @@ public class HerbivorState : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Food"))
+        if (collision.gameObject.TryGetComponent(out FoodCore fc))
         {
-            cc.Eat(2);
+            cc.Eat(fc.GetFoodToAdd());
             Destroy(collision.gameObject);
             fm.ChangeCurrentFood(-1);
             //hasTarget = false;

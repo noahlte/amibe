@@ -30,7 +30,7 @@ public class CellDivision : MonoBehaviour
 
         if (timer <= 0 && cc.GetHunger() > hungerForDivision)
         {
-            Divide();
+            DivideCell();
         }
         else if (timer <= 0 && cc.GetHunger() < hungerForDivision)
         {
@@ -38,7 +38,7 @@ public class CellDivision : MonoBehaviour
         }
     }
 
-    private void Divide()
+    private void DivideCell()
     {
         Vector3 firstChildPosition = transform.position + new Vector3(cr.GetRadius(), 0, 0);
         Vector3 secondChildPosition = transform.position - new Vector3(cr.GetRadius(), 0, 0);
