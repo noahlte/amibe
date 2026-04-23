@@ -10,7 +10,7 @@ public class FoodManager : MonoBehaviour
     private float timer = 0f;
     private int currentFood;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < maxFood; i++)
         {
@@ -18,7 +18,7 @@ public class FoodManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (currentFood < maxFood)
         {
@@ -35,8 +35,10 @@ public class FoodManager : MonoBehaviour
 
     private void SpawnFood()
     {
-        Instantiate(foodPrefab, new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0), Quaternion.identity);
+        GameObject food = Instantiate(foodPrefab, new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0), Quaternion.identity);
+        food.transform.parent = gameObject.transform;
         currentFood++;
+        Debug.Log($"Spawn new food : {food.name} | Food count : {currentFood}");
     }
 
     public void ChangeCurrentFood(int amount)

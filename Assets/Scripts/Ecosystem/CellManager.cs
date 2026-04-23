@@ -7,23 +7,26 @@ public class CellManager : MonoBehaviour
     [SerializeField] private GameObject cell;
     private int cellCount;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < baseNumberOfCell; i++)
         {
-            SpawnCell();
+            SpawnCell(new Vector3(Random.Range(-9, 9), Random.Range(-5, 5), 0));
         }
     }
 
-    private void SpawnCell()
+    private void SpawnCell(Vector3 position)
     {
-        GameObject newCell = Instantiate(cell, new Vector3(Random.Range(-9, 9), Random.Range(-5, 5), 0), Quaternion.identity);
+        GameObject newCell = Instantiate(cell, position, Quaternion.identity);
         newCell.AddComponent<NeutralState>();
+        newCell.transform.parent = gameObject.transform;
         cellCount++;
+        Debug.Log($"Spawn new cell : {newCell.name} | Number : {cellCount}");
     }
 
     public void ChangeCellCount(int amount)
     {
         cellCount += amount;
+        Debug.Log($"Cell count is now {cellCount}");
     }
 }

@@ -17,7 +17,7 @@ public class CellSteering : MonoBehaviour
 
     private bool isSeeking = true;
 
-    void Start()
+    private void Start()
     {
         xoff1 = Random.Range(0, 10000);
         yoff1 = Random.Range(0, 10000);
@@ -29,7 +29,7 @@ public class CellSteering : MonoBehaviour
         acceleration = new Vector3(0, 0, 0);
     }
 
-    void Update()
+    private void Update()
     {
         CheckEdges();
 

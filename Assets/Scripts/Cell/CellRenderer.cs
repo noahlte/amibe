@@ -25,12 +25,15 @@ public class CellRenderer : MonoBehaviour
     private LineRenderer lr;
     private CellCore cc;
 
-    void Start()
+    private void Awake()
     {
         cc = gameObject.GetComponent<CellCore>();
-        radius = Random.Range(cc.minRadius, cc.maxRadius);
-
         lr = gameObject.GetComponent<LineRenderer>();
+    }
+
+    private void Start()
+    {  
+        radius = Random.Range(cc.minRadius, cc.maxRadius);
         lr.positionCount = numberOfPoints;
 
         points = new Vector2[numberOfPoints];
@@ -40,7 +43,7 @@ public class CellRenderer : MonoBehaviour
         points = CalculateCoordonate();
     }
 
-    void Update()
+    private void Update()
     {
         for (int i = 0; i < numberOfPoints; i++)
         {

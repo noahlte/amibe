@@ -7,9 +7,9 @@ public class CellCore : MonoBehaviour
     [SerializeField] public float minRadius = 0.2f;
 
     [Header("Cell Life")]
-    [SerializeField] private float hunger;
     [SerializeField] private float hungerLossPerSecond = 1f;
     [SerializeField] private float maxHunger = 100f;
+    private float hunger;
 
     [Header("Cell Seeking")]
     [SerializeField] private float seekRadius = 0.6f;
@@ -20,7 +20,7 @@ public class CellCore : MonoBehaviour
 
     private bool isDead;
 
-    void Start()
+    private void Start()
     {
         collision.radius = minRadius;
         seekRadiusTrigger.radius = seekRadius;
@@ -28,7 +28,7 @@ public class CellCore : MonoBehaviour
         hunger = maxHunger;
     }
 
-    void Update()
+    private void Update()
     {   
         HungerLoss();
 
