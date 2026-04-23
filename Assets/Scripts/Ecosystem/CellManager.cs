@@ -9,9 +9,13 @@ public class CellManager : MonoBehaviour
 
     private void Start()
     {
+        float cameraWidth, cameraHeight;
+
+        (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
+
         for (int i = 0; i < baseNumberOfCell; i++)
         {
-            SpawnCell(new Vector3(Random.Range(-9, 9), Random.Range(-5, 5), 0));
+            SpawnCell(new Vector3(Random.Range(-cameraWidth, cameraWidth), Random.Range(-cameraHeight, cameraHeight), 0));
         }
     }
 

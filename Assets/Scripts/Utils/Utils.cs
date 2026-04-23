@@ -6,4 +6,12 @@ public class Utils : MonoBehaviour
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
+
+    public static (float, float) GetCameraBounds()
+    {
+        float cameraHeight = Camera.main.orthographicSize;
+        float cameraWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        
+        return (cameraWidth, cameraHeight);
+    }
 }

@@ -17,6 +17,9 @@ public class CellSteering : MonoBehaviour
 
     private bool isSeeking = true;
 
+    private float cameraHeight;
+    private float cameraWidth;
+
     private void Start()
     {
         xoff1 = Random.Range(0, 10000);
@@ -27,6 +30,8 @@ public class CellSteering : MonoBehaviour
 
         velocity = new Vector3(0, 0, 0);
         acceleration = new Vector3(0, 0, 0);
+
+        (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
     }
 
     private void Update()
@@ -64,10 +69,10 @@ public class CellSteering : MonoBehaviour
 
     private void CheckEdges()
     {
-        if (transform.position.x > 9f) transform.position = new Vector3(-9f, transform.position.y, 0);
-        if (transform.position.x < -9f) transform.position = new Vector3(9f, transform.position.y, 0);
-        if (transform.position.y > 5f) transform.position = new Vector3(transform.position.x, -5f, 0);
-        if (transform.position.y < -5f) transform.position = new Vector3(transform.position.x, 5f, 0);
+        if (transform.position.x > cameraWidth) transform.position = new Vector3(-cameraWidth, transform.position.y, 0);
+        if (transform.position.x < -cameraWidth) transform.position = new Vector3(cameraWidth, transform.position.y, 0);
+        if (transform.position.y > cameraHeight) transform.position = new Vector3(transform.position.x, -cameraHeight, 0);
+        if (transform.position.y < -cameraHeight) transform.position = new Vector3(transform.position.x, cameraHeight, 0);
     }
 
     private (float, float) IncrementOffset(float xoff, float yoff)
