@@ -8,19 +8,19 @@ public class CellDivision : MonoBehaviour
     [SerializeField] private float hungerForDivision = 50f;
     private float timer;
 
-    private CellCore cc;
-    private CellRenderer cr;
-    private CellManager cm;
+    private CellCore cellCore;
+    private CellRenderer cellRenderer;
+    private CellManager cellManager;
 
     private void Awake()
     {
-        cc = gameObject.GetComponent<CellCore>();
-        cr = gameObject.GetComponent<CellRenderer>();
+        cellCore = gameObject.GetComponent<CellCore>();
+        cellRenderer = gameObject.GetComponent<CellRenderer>();
     }
 
     private void Start()
     {
-        cm = FindAnyObjectByType<CellManager>();
+        cellManager = FindAnyObjectByType<CellManager>();
         timer = Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
     }
 
@@ -28,11 +28,11 @@ public class CellDivision : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
-        if (timer <= 0 && cc.GetHunger() > hungerForDivision)
+        if (timer <= 0 && cellCore.GetHunger() > hungerForDivision)
         {
             DivideCell();
         }
-        else if (timer <= 0 && cc.GetHunger() < hungerForDivision)
+        else if (timer <= 0 && cellCore.GetHunger() < hungerForDivision)
         {
             timer = Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
         }
@@ -40,13 +40,13 @@ public class CellDivision : MonoBehaviour
 
     private void DivideCell()
     {
-        Vector3 firstChildPosition = transform.position + new Vector3(cr.GetRadius(), 0, 0);
-        Vector3 secondChildPosition = transform.position - new Vector3(cr.GetRadius(), 0, 0);
+        Vector3 firstChildPosition = transform.position + new Vector3(cellRenderer.GetRadius(), 0, 0);
+        Vector3 secondChildPosition = transform.position - new Vector3(cellRenderer.GetRadius(), 0, 0);
 
-        float childHunger = cc.GetHunger() / 2;
+        float childHunger = cellCore.GetHunger() / 2;
 
-        cm.SpawnCell(firstChildPosition, childHunger);
-        cm.SpawnCell(secondChildPosition, childHunger);
+        cellManager.SpawnCell(firstChildPosition, childHunger);
+        cellManager.SpawnCell(secondChildPosition, childHunger);
         Destroy(gameObject);
     }
 }

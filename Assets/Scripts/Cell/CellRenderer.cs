@@ -22,41 +22,41 @@ public class CellRenderer : MonoBehaviour
     // Points
     private Vector2[] points;
     
-    private LineRenderer lr;
-    private CellCore cc;
+    private LineRenderer lineRenderer;
+    private CellCore cellCore;
 
     private void Awake()
     {
-        cc = gameObject.GetComponent<CellCore>();
-        lr = gameObject.GetComponent<LineRenderer>();
+        cellCore = gameObject.GetComponent<CellCore>();
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 
     private void Start()
     {  
-        radius = Random.Range(cc.minRadius, cc.maxRadius);
-        lr.positionCount = numberOfPoints;
+        radius = Random.Range(cellCore.minRadius, cellCore.maxRadius);
+        lineRenderer.positionCount = numberOfPoints;
 
         points = new Vector2[numberOfPoints];
         xoff = Random.Range(0, 10000);
         yoff = Random.Range(0, 10000);
 
-        points = CalculateCoordonate();
+        points = CalculatePointsCoordonate();
     }
 
     private void Update()
     {
         for (int i = 0; i < numberOfPoints; i++)
         {
-            lr.SetPosition(i, points[i]);
+            lineRenderer.SetPosition(i, points[i]);
         }
 
         xoff += timeIncrement * Time.deltaTime;
         yoff += timeIncrement * Time.deltaTime;
 
-        points = CalculateCoordonate();
+        points = CalculatePointsCoordonate();
     }
 
-    private Vector2[] CalculateCoordonate()
+    private Vector2[] CalculatePointsCoordonate()
     {
         Vector2[] tempPoints = new Vector2[numberOfPoints];
 

@@ -4,7 +4,7 @@ public class CellManager : MonoBehaviour
 {
     [Header("Cell Spawner")]
     [SerializeField] private int baseNumberOfCell = 10;
-    [SerializeField] private GameObject cell;
+    [SerializeField] private GameObject cellPrefab;
     private int cellCount;
 
     private void Start()
@@ -21,7 +21,7 @@ public class CellManager : MonoBehaviour
 
     public void SpawnCell(Vector3 position, float hungerToSet = 0f)
     {
-        GameObject newCell = Instantiate(cell, position, Quaternion.identity);
+        GameObject newCell = Instantiate(cellPrefab, position, Quaternion.identity);
         newCell.AddComponent<HerbivorState>();
         newCell.transform.parent = gameObject.transform;
 

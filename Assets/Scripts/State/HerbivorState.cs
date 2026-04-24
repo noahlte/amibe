@@ -15,8 +15,9 @@ public class HerbivorState : BaseState
 
     protected override void Eat(GameObject target)
     {
-        cc.Eat(target.GetComponent<FoodCore>().GetFoodToAdd());
+        FoodCore foodCore = target.GetComponent<FoodCore>();
+        cellCore.Eat(foodCore.GetFoodToAdd());
         Destroy(target);
-        fm.ChangeCurrentFood(-1);
+        foodManager.ChangeCurrentFood(-1);
     }
 }

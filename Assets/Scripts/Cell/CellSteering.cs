@@ -28,8 +28,8 @@ public class CellSteering : MonoBehaviour
         xoff2 = Random.Range(0, 10000);
         yoff2 = Random.Range(0, 10000);
 
-        velocity = new Vector3(0, 0, 0);
-        acceleration = new Vector3(0, 0, 0);
+        velocity = Vector3.zero;
+        acceleration = Vector3.zero;
 
         (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
     }

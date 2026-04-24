@@ -16,7 +16,7 @@ public class PredatorState : BaseState
 
     protected override bool CanTarget(GameObject target)
     {
-        return target.TryGetComponent(out Prey prey) && cc.GetHunger() < hungerToEat;
+        return target.TryGetComponent(out Prey prey) && cellCore.GetHunger() < hungerToEat;
     }
 
     protected override void Eat(GameObject target)
@@ -25,7 +25,7 @@ public class PredatorState : BaseState
         CellCore preyCore = target.GetComponent<CellCore>();
         int foodToAdd = Convert.ToInt32(Mathf.Round(preyRenderer.GetRadius() * preyCore.GetHunger() / foodToAddDivider));
 
-        cc.Eat(foodToAdd);
+        cellCore.Eat(foodToAdd);
         Destroy(target);
         cm.ChangeCellCount(-1);
     }

@@ -3,9 +3,9 @@ using UnityEngine;
 public abstract class BaseState : MonoBehaviour
 {
     // protected signifie accessible uniquement dans la classe et classe enfant
-    protected FoodManager fm;
-    private CellSteering cs;
-    protected CellCore cc;
+    protected FoodManager foodManager;
+    private CellSteering cellSteering;
+    protected CellCore cellCore;
 
     private bool hasTarget;
     private Vector3 targetPosition;
@@ -15,20 +15,20 @@ public abstract class BaseState : MonoBehaviour
 
     private void Awake()
     {
-        cs = gameObject.GetComponent<CellSteering>();
-        cc = gameObject.GetComponent<CellCore>();
+        cellSteering = gameObject.GetComponent<CellSteering>();
+        cellCore = gameObject.GetComponent<CellCore>();
     }
 
     protected virtual void Start()
     {
-        fm = FindAnyObjectByType<FoodManager>();
+        foodManager = FindAnyObjectByType<FoodManager>();
     }
 
     private void Update()
     {
         if (hasTarget)
         {
-            cs.SteerTo(targetPosition);
+            cellSteering.SteerTo(targetPosition);
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class BaseState : MonoBehaviour
     {
         if (CanTarget(collision.gameObject) && !hasTarget)
         {
-            cs.StopSeeking();
+            cellSteering.StopSeeking();
             hasTarget = true;
             targetPosition = collision.transform.position;
         }
@@ -47,7 +47,7 @@ public abstract class BaseState : MonoBehaviour
         if (CanTarget(other.gameObject)  && hasTarget)
         {
             hasTarget = false;
-            cs.StartSeeking();
+            cellSteering.StartSeeking();
         }
     }
 
