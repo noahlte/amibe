@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
+    // protected signifie accessible uniquement dans la classe et classe enfant
     protected FoodManager fm;
     private CellSteering cs;
     protected CellCore cc;
@@ -18,7 +19,7 @@ public abstract class BaseState : MonoBehaviour
         cc = gameObject.GetComponent<CellCore>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         fm = FindAnyObjectByType<FoodManager>();
     }
