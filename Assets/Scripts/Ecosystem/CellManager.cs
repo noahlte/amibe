@@ -6,6 +6,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] private int baseNumberOfCell = 10;
     [SerializeField] private GameObject herbivorCellPrefab;
     [SerializeField] private GameObject predatorCellPrefab;
+
     private int cellCount;
 
     private void Start()
@@ -24,28 +25,39 @@ public class CellManager : MonoBehaviour
     {
         GameObject newCell;
 
-        if (hasMutate)
-        {
-            newCell = Instantiate(predatorCellPrefab, position, Quaternion.identity);
-        }
-        else
-        {
-            newCell = Instantiate(herbivorCellPrefab, position, Quaternion.identity);
-        }
+        newCell = hasMutate ? 
+            Instantiate(predatorCellPrefab, position, Quaternion.identity) : 
+            Instantiate(herbivorCellPrefab, position, Quaternion.identity);
+
+        CellCore newCellCore = newCell.GetComponent<CellCore>();
+
+        newCellCore.OnCellDestroy += CellCore_OnCellDestroy;
+        newCell.GetComponent<CellDivision>().OnCellDivide += Cell_OnCellDivide;
 
         newCell.transform.parent = gameObject.transform;
 
         if (hungerToSet != 0)
         {
-            newCell.GetComponent<CellCore>().SetHunger(hungerToSet);
+            newCellCore.SetHunger(hungerToSet);
         }
 
-        cellCount++;
+        ChangeCellCount(1);
     }
 
     public void ChangeCellCount(int amount)
     {
         cellCount += amount;
         Debug.Log($"Cell count is now {cellCount}");
+    }
+
+    private void Cell_OnCellDivide(object sender, CellDivision.OnCellDivideArgs e)
+    {
+        SpawnCell(e.firstChildPosition, e.doesFirstChildMutate, e.childHunger);
+        SpawnCell(e.secondChildPosition, e.doesSecondChildMutate, e.childHunger);
+    }
+
+    private void CellCore_OnCellDestroy(object sender, System.EventArgs e)
+    {
+        ChangeCellCount(-1);
     }
 }

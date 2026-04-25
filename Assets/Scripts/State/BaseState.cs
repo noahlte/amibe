@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class BaseState : MonoBehaviour
 {
     // protected signifie accessible uniquement dans la classe et classe enfant
-    protected FoodManager foodManager;
     private CellSteering cellSteering;
     protected CellCore cellCore;
 
@@ -21,7 +20,7 @@ public abstract class BaseState : MonoBehaviour
 
     protected virtual void Start()
     {
-        foodManager = FindAnyObjectByType<FoodManager>();
+
     }
 
     private void Update()
@@ -44,7 +43,7 @@ public abstract class BaseState : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (CanTarget(other.gameObject)  && hasTarget)
+        if (CanTarget(other.gameObject) && hasTarget)
         {
             hasTarget = false;
             cellSteering.StartSeeking();

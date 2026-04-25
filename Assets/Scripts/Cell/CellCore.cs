@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class CellCore : MonoBehaviour
 {
+    public event EventHandler OnCellDestroy;
+
     [Header("Cell Visual")]
     [SerializeField] private float maxRadius = 0.3f;
     [SerializeField] private float minRadius = 0.2f;
@@ -26,7 +29,7 @@ public class CellCore : MonoBehaviour
         collision.radius = minRadius;
         seekRadiusTrigger.radius = seekRadius;
 
-        radius = Random.Range(minRadius, maxRadius);
+        radius = UnityEngine.Random.Range(minRadius, maxRadius);
 
         hunger = maxHunger;
     }
@@ -70,5 +73,11 @@ public class CellCore : MonoBehaviour
     public float GetRadius()
     {
         return radius;
+    }
+
+    public void DestroySelf()
+    {
+        OnCellDestroy?.Invoke(this, EventArgs.Empty);
+        Destroy(gameObject);
     }
 }

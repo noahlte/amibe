@@ -6,6 +6,7 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private int maxFood = 100;
     [SerializeField] private float spawnRate = 1f;
     [SerializeField] private GameObject foodPrefab;
+    [SerializeField] private FoodCore foodCore;
 
     private float timer = 0f;
     private int currentFood;
@@ -19,6 +20,13 @@ public class FoodManager : MonoBehaviour
         {
             SpawnFood();
         }
+
+        foodCore.OnFoodDestroy += FoodCore_OnFoodDestroy;
+    }
+
+    private void FoodCore_OnFoodDestroy(object sender, System.EventArgs e)
+    {
+        ChangeCurrentFood(-1);
     }
 
     private void Update()
@@ -32,8 +40,6 @@ public class FoodManager : MonoBehaviour
                 timer = 0f;
             }
         }
-
-        Debug.Log(currentFood);
     }
 
     private void SpawnFood()
@@ -47,5 +53,6 @@ public class FoodManager : MonoBehaviour
     public void ChangeCurrentFood(int amount)
     {
         currentFood += amount;
+        Debug.Log(currentFood);
     }
 }

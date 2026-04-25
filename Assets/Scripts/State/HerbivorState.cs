@@ -17,7 +17,6 @@ public class HerbivorState : BaseState
     {
         FoodCore foodCore = target.GetComponent<FoodCore>();
         cellCore.Eat(foodCore.GetFoodToAdd());
-        Destroy(target);
-        foodManager.ChangeCurrentFood(-1);
+        foodCore.DestroySelf();
     }
 }

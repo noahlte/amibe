@@ -1,18 +1,28 @@
-using NUnit.Framework;
+using System;
 using UnityEngine;
 
 public class CellDivision : MonoBehaviour
 {
+    public event EventHandler<OnCellDivideArgs> OnCellDivide;
+    public class OnCellDivideArgs : EventArgs
+    {
+        public Vector3 firstChildPosition;
+        public Vector3 secondChildPosition;
+        public bool doesFirstChildMutate;
+        public bool doesSecondChildMutate;
+        public float childHunger;
+    }
+
     [Header("Division Info")]
     [SerializeField] private float minTimeBeforeDivision = 10f;
     [SerializeField] private float maxTimeBeforeDivision = 20f;
     [SerializeField] private float hungerForDivision = 50f;
     [SerializeField] private float percentageOfMutation = 1f;
+
     private float timer;
     private bool isPredator;
 
     private CellCore cellCore;
-    private CellManager cellManager;
 
     private void Awake()
     {
@@ -22,8 +32,7 @@ public class CellDivision : MonoBehaviour
 
     private void Start()
     {
-        cellManager = FindAnyObjectByType<CellManager>();
-        timer = Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
+        timer = UnityEngine.Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
     }
 
     private void Update()
@@ -36,7 +45,7 @@ public class CellDivision : MonoBehaviour
         }
         else if (timer <= 0 && cellCore.GetHunger() < hungerForDivision)
         {
-            timer = Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
+            timer = UnityEngine.Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
         }
     }
 
@@ -50,14 +59,21 @@ public class CellDivision : MonoBehaviour
         bool doesFirstChildMutate = isPredator || DoesMutate();
         bool doesSecondChildMutate = isPredator || DoesMutate();
 
-        cellManager.SpawnCell(firstChildPosition, doesFirstChildMutate, childHunger);
-        cellManager.SpawnCell(secondChildPosition, doesSecondChildMutate, childHunger);
-        Destroy(gameObject);
+        cellCore.DestroySelf();
+
+        OnCellDivide?.Invoke(this, new OnCellDivideArgs
+        {
+            firstChildPosition = firstChildPosition,
+            secondChildPosition = secondChildPosition,
+            childHunger = childHunger,
+            doesFirstChildMutate = doesFirstChildMutate,
+            doesSecondChildMutate = doesSecondChildMutate
+        });
     }
 
     private bool DoesMutate()
     {
-        float rand = Random.Range(0, 100);
+        float rand = UnityEngine.Random.Range(0, 100);
         return rand < percentageOfMutation;
     }
 }

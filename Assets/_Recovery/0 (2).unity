@@ -151,7 +151,6 @@ MonoBehaviour:
   maxFood: 200
   spawnRate: 0.1
   foodPrefab: {fileID: 4793597982869927218, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
-  foodCore: {fileID: -7436033798094823796, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
 --- !u!4 &269067850
 Transform:
   m_ObjectHideFlags: 0
@@ -418,7 +417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellManager
   baseNumberOfCell: 10
-  cellCore: {fileID: 6907657618854597937, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
   herbivorCellPrefab: {fileID: 8244071645615119901, guid: 77e3e6953f602a24e9e8965aeaf7f8b8, type: 3}
   predatorCellPrefab: {fileID: 1168074760139277900, guid: 0a03816713df27e479b0723e8ebc3071, type: 3}
 --- !u!4 &1174743215
@@ -435,52 +433,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1823427205}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1805550482
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1805550484}
-  - component: {fileID: 1805550483}
-  m_Layer: 0
-  m_Name: SerialCommunication
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1805550483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805550482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e7c986f2c9faab489fdaeff7b740fe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SerialReceiver
-  portName: COM4
-  baudRate: 9600
---- !u!4 &1805550484
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805550482}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7203, y: -0.0974, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1823427204
 GameObject:
@@ -522,4 +474,3 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1823427205}
-  - {fileID: 1805550484}
