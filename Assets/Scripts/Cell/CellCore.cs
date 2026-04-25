@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class CellCore : MonoBehaviour
 {
-    [Header("Cell Size")]
-    [SerializeField] public float maxRadius = 0.3f;
-    [SerializeField] public float minRadius = 0.2f;
+    [Header("Cell Visual")]
+    [SerializeField] private float maxRadius = 0.3f;
+    [SerializeField] private float minRadius = 0.2f;
+    private float radius;
 
     [Header("Cell Life")]
     [SerializeField] private float hungerLossPerSecond = 1f;
@@ -24,6 +25,8 @@ public class CellCore : MonoBehaviour
     {
         collision.radius = minRadius;
         seekRadiusTrigger.radius = seekRadius;
+
+        radius = Random.Range(minRadius, maxRadius);
 
         hunger = maxHunger;
     }
@@ -62,5 +65,10 @@ public class CellCore : MonoBehaviour
     public void SetHunger(float amount)
     {
         hunger = amount;
+    }
+
+    public float GetRadius()
+    {
+        return radius;
     }
 }

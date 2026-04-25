@@ -21,9 +21,8 @@ public class PredatorState : BaseState
 
     protected override void Eat(GameObject target)
     {
-        CellRenderer preyRenderer = target.GetComponent<CellRenderer>();
         CellCore preyCore = target.GetComponent<CellCore>();
-        int foodToAdd = Mathf.RoundToInt(preyRenderer.GetRadius() * preyCore.GetHunger() / foodToAddDivider);
+        int foodToAdd = Mathf.RoundToInt(preyCore.GetRadius() * preyCore.GetHunger() / foodToAddDivider);
 
         cellCore.Eat(foodToAdd);
         Destroy(target);
