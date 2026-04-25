@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class CellDivision : MonoBehaviour
@@ -6,7 +7,9 @@ public class CellDivision : MonoBehaviour
     [SerializeField] private float minTimeBeforeDivision = 10f;
     [SerializeField] private float maxTimeBeforeDivision = 20f;
     [SerializeField] private float hungerForDivision = 50f;
+    [SerializeField] private float percentageOfMutation = 1f;
     private float timer;
+    private bool isPredator;
 
     private CellCore cellCore;
     private CellRenderer cellRenderer;
@@ -16,6 +19,7 @@ public class CellDivision : MonoBehaviour
     {
         cellCore = gameObject.GetComponent<CellCore>();
         cellRenderer = gameObject.GetComponent<CellRenderer>();
+        isPredator = gameObject.TryGetComponent(out PredatorState predatorState);
     }
 
     private void Start()
@@ -45,8 +49,17 @@ public class CellDivision : MonoBehaviour
 
         float childHunger = cellCore.GetHunger() / 2;
 
-        cellManager.SpawnCell(firstChildPosition, childHunger);
-        cellManager.SpawnCell(secondChildPosition, childHunger);
+        bool doesFirstChildMutate = isPredator || DoesMutate();
+        bool doesSecondChildMutate = isPredator || DoesMutate();
+
+        cellManager.SpawnCell(firstChildPosition, doesFirstChildMutate, childHunger);
+        cellManager.SpawnCell(secondChildPosition, doesSecondChildMutate, childHunger);
         Destroy(gameObject);
+    }
+
+    private bool DoesMutate()
+    {
+        float rand = Random.Range(0, 100);
+        return rand < percentageOfMutation;
     }
 }

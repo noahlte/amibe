@@ -9,9 +9,12 @@ public class FoodManager : MonoBehaviour
 
     private float timer = 0f;
     private int currentFood;
+    private float cameraWidth, cameraHeight;
 
     private void Start()
     {
+        (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
+        
         for (int i = 0; i < maxFood; i++)
         {
             SpawnFood();
@@ -35,11 +38,10 @@ public class FoodManager : MonoBehaviour
 
     private void SpawnFood()
     {
-        Vector3 foodToSpawnPosition = new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0);
+        Vector3 foodToSpawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), Random.Range(-cameraHeight, cameraHeight), 0);
         GameObject food = Instantiate(foodPrefab, foodToSpawnPosition, Quaternion.identity);
         food.transform.parent = gameObject.transform;
         currentFood++;
-        Debug.Log($"Spawn new food : {food.name} | Food count : {currentFood}");
     }
 
     public void ChangeCurrentFood(int amount)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8461566430613142124}
   - component: {fileID: 8812874870383191765}
   - component: {fileID: -7436033798094823796}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Food
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a06ac1ae1588f94c9e91892b0c86514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodCore
+  foodToAdd: 2

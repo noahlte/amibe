@@ -104,6 +104,7 @@ MonoBehaviour:
   minTimeBeforeDivision: 10
   maxTimeBeforeDivision: 20
   hungerForDivision: 100
+  percentageOfMutation: 10
 --- !u!120 &1657589920146957846
 LineRenderer:
   serializedVersion: 3

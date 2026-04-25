@@ -23,7 +23,7 @@ public class PredatorState : BaseState
     {
         CellRenderer preyRenderer = target.GetComponent<CellRenderer>();
         CellCore preyCore = target.GetComponent<CellCore>();
-        int foodToAdd = Convert.ToInt32(Mathf.Round(preyRenderer.GetRadius() * preyCore.GetHunger() / foodToAddDivider));
+        int foodToAdd = Mathf.RoundToInt(preyRenderer.GetRadius() * preyCore.GetHunger() / foodToAddDivider);
 
         cellCore.Eat(foodToAdd);
         Destroy(target);
