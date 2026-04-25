@@ -2,22 +2,42 @@ using UnityEngine;
 
 public class CellManager : MonoBehaviour
 {
-    [Header("Cell Spawner")]
+    [Header("Cell Base Spawner")]
     [SerializeField] private int baseNumberOfCell = 10;
     [SerializeField] private GameObject herbivorCellPrefab;
     [SerializeField] private GameObject predatorCellPrefab;
 
+    [Header("Cell Interface Spawner")]
+    [SerializeField] private SerialReceiver serialReceiver;
+    [SerializeField] private float timeBeforeSpawn = 10f;
+    private float interfaceSpawnTimer = 0f;
+
     private int cellCount;
+
+    private float cameraWidth, cameraHeight;
 
     private void Start()
     {
-        float cameraWidth, cameraHeight;
-
         (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
 
         for (int i = 0; i < baseNumberOfCell; i++)
         {
             SpawnCell(new Vector3(Random.Range(-cameraWidth, cameraWidth), Random.Range(-cameraHeight, cameraHeight), 0));
+        }
+    }
+
+    private void Update()
+    {
+        if (serialReceiver.IsTriggerSpawnButton())
+        {
+            interfaceSpawnTimer += Time.deltaTime;
+        }
+
+        if (interfaceSpawnTimer > timeBeforeSpawn)
+        {
+            Vector3 spawnPosition = new Vector3(0, -cameraHeight, 0);
+            SpawnCell(spawnPosition);
+            interfaceSpawnTimer = 0f;
         }
     }
 
