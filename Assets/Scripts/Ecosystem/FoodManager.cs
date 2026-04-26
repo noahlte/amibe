@@ -20,8 +20,6 @@ public class FoodManager : MonoBehaviour
         {
             SpawnFood();
         }
-
-        foodCore.OnFoodDestroy += FoodCore_OnFoodDestroy;
     }
 
     private void FoodCore_OnFoodDestroy(object sender, System.EventArgs e)
@@ -46,6 +44,7 @@ public class FoodManager : MonoBehaviour
     {
         Vector3 foodToSpawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), Random.Range(-cameraHeight, cameraHeight), 0);
         GameObject food = Instantiate(foodPrefab, foodToSpawnPosition, Quaternion.identity);
+        food.GetComponent<FoodCore>().OnFoodDestroy += FoodCore_OnFoodDestroy;
         food.transform.parent = gameObject.transform;
         currentFood++;
     }

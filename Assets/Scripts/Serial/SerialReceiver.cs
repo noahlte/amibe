@@ -34,7 +34,7 @@ public class SerialReceiver : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(receivedStringMessage);
+        //Debug.Log(receivedStringMessage);
 
         spawnTriggerButton = 
             receivedStringMessage != null && 

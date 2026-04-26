@@ -2,7 +2,6 @@ using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
-    // protected signifie accessible uniquement dans la classe et classe enfant
     private CellSteering cellSteering;
     protected CellCore cellCore;
 
@@ -16,11 +15,6 @@ public abstract class BaseState : MonoBehaviour
     {
         cellSteering = gameObject.GetComponent<CellSteering>();
         cellCore = gameObject.GetComponent<CellCore>();
-    }
-
-    protected virtual void Start()
-    {
-
     }
 
     private void Update()
