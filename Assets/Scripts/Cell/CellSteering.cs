@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CellSteering : MonoBehaviour
 {
+    private float cameraHeight;
+    private float cameraWidth;
+
     [Header("Movement")]
     [SerializeField] private float topSpeed = 0.2f;
     [SerializeField] private float xIncrement = 0.2f;
@@ -10,15 +13,27 @@ public class CellSteering : MonoBehaviour
     private Vector3 velocity;
     private Vector3 acceleration;
 
+    private ICellState cellState;
+
     private float xoff1;
     private float yoff1;
     private float xoff2;
     private float yoff2;
 
-    private bool isSeeking = true;
+    private enum MovementState
+    {
+        Seeking,
+        Eating
+    }
 
-    private float cameraHeight;
-    private float cameraWidth;
+    private MovementState movementState;
+
+    private Vector3 targetPosition;
+
+    private void Awake()
+    {
+        cellState = gameObject.GetComponent<ICellState>();
+    }
 
     private void Start()
     {
@@ -32,19 +47,45 @@ public class CellSteering : MonoBehaviour
         acceleration = Vector3.zero;
 
         (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
+
+        cellState.OnTargetFound += CellState_OnTargetFound;
+        cellState.OnTargetLost += CellState_OnTargetLost;
+        cellState.OnTargetEat += CellState_OnTargetEat;
+
+        movementState = MovementState.Seeking;
+    }
+
+    private void CellState_OnTargetFound(object sender, BaseState.OnTargetFoundArgs e)
+    {
+        movementState = MovementState.Eating;
+        targetPosition = e.targetPosition;
+    }
+    private void CellState_OnTargetLost(object sender, System.EventArgs e)
+    {
+        movementState = MovementState.Seeking;
+    }
+
+    private void CellState_OnTargetEat(object sender, System.EventArgs e)
+    {
+        movementState = MovementState.Seeking;
     }
 
     private void Update()
     {
         CheckEdges();
 
-        if (isSeeking)
+        switch (movementState)
         {
-            SeekSteering();
-        }
+            case MovementState.Seeking:
+                SeekSteering();
 
-        (xoff1, yoff1) = IncrementOffset(xoff1, yoff1);
-        (xoff2, yoff2) = IncrementOffset(xoff2, yoff2);
+                (xoff1, yoff1) = IncrementOffset(xoff1, yoff1);
+                (xoff2, yoff2) = IncrementOffset(xoff2, yoff2);
+
+                break;
+            case MovementState.Eating:
+                SteerTo(targetPosition); break;
+        }
     }
 
     public void SteerTo(Vector3 target)
@@ -94,15 +135,5 @@ public class CellSteering : MonoBehaviour
         acceleration = new Vector3(xDirection, yDirection, 0);
         
         MoveCell(acceleration);
-    }
-
-    public void StopSeeking()
-    {
-        isSeeking = false;
-    }
-
-    public void StartSeeking()
-    {
-        isSeeking = true;
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PredatorState : BaseState
+public class PredatorState : BaseState, ICellState
 {
     [Header("Predator Info")]
     [SerializeField] private float hungerToEat = 50f;

@@ -1,11 +1,18 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
-    private CellSteering cellSteering;
+    public event EventHandler<OnTargetFoundArgs> OnTargetFound;
+    public class OnTargetFoundArgs : EventArgs
+    {
+        public Vector3 targetPosition;
+    }
+    public event EventHandler OnTargetLost;
+    public event EventHandler OnTargetEat;
+
     protected CellCore cellCore;
 
-    private bool hasTarget;
     private Vector3 targetPosition;
 
     protected abstract void Eat(GameObject target);
@@ -13,34 +20,26 @@ public abstract class BaseState : MonoBehaviour
 
     private void Awake()
     {
-        cellSteering = gameObject.GetComponent<CellSteering>();
         cellCore = gameObject.GetComponent<CellCore>();
-    }
-
-    private void Update()
-    {
-        if (hasTarget)
-        {
-            cellSteering.SteerTo(targetPosition);
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (CanTarget(collision.gameObject) && !hasTarget)
+        if (CanTarget(collision.gameObject))
         {
-            cellSteering.StopSeeking();
-            hasTarget = true;
             targetPosition = collision.transform.position;
+            OnTargetFound?.Invoke(this, new OnTargetFoundArgs
+            {
+                targetPosition = targetPosition,
+            });
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (CanTarget(other.gameObject) && hasTarget)
+        if (CanTarget(other.gameObject))
         {
-            hasTarget = false;
-            cellSteering.StartSeeking();
+            OnTargetLost?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -49,6 +48,7 @@ public abstract class BaseState : MonoBehaviour
         if (CanTarget(collision.gameObject))
         {
             Eat(collision.gameObject);
+            OnTargetEat?.Invoke(this, EventArgs.Empty);
         }
     }
 }

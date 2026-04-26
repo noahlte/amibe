@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HerbivorState : BaseState
+public class HerbivorState : BaseState, ICellState
 {
     protected override bool CanTarget(GameObject target)
     {
