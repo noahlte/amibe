@@ -22,8 +22,6 @@ public class CellCore : MonoBehaviour
     [Header("Cell Collision")]
     [SerializeField] private CircleCollider2D collision;
 
-    private bool isDead;
-
     private void Start()
     {
         collision.radius = minRadius;
@@ -37,22 +35,20 @@ public class CellCore : MonoBehaviour
     private void Update()
     {   
         HungerLoss();
-
-        if (isDead)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void HungerLoss()
     {
         hunger -= hungerLossPerSecond * Time.deltaTime;
-        if (hunger <= 0) isDead = true;
+
+        if (hunger <= 0) DestroySelf();
     }
 
     public void Eat(int amount)
     {
         hunger += amount;
+
+        if (hunger > maxHunger) hunger = maxHunger;
     }
 
     public float GetHunger()

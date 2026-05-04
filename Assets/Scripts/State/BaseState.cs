@@ -23,6 +23,11 @@ public abstract class BaseState : MonoBehaviour
         cellCore = gameObject.GetComponent<CellCore>();
     }
 
+    protected virtual void Update()
+    {
+
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (CanTarget(collision.gameObject))

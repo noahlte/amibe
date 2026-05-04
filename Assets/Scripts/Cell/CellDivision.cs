@@ -42,6 +42,7 @@ public class CellDivision : MonoBehaviour
         if (timer <= 0 && cellCore.GetHunger() > hungerForDivision)
         {
             DivideCell();
+            timer = UnityEngine.Random.Range(minTimeBeforeDivision, maxTimeBeforeDivision);
         }
         else if (timer <= 0 && cellCore.GetHunger() < hungerForDivision)
         {

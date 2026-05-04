@@ -8,7 +8,6 @@ public class CellManager : MonoBehaviour
     [SerializeField] private GameObject predatorCellPrefab;
 
     [Header("Cell Interface Spawner")]
-    [SerializeField] private SerialReceiver serialReceiver;
     [SerializeField] private float timeBeforeSpawn = 10f;
     private float interfaceSpawnTimer = 0f;
 
@@ -28,7 +27,7 @@ public class CellManager : MonoBehaviour
 
     private void Update()
     {
-        if (serialReceiver.IsTriggerSpawnButton())
+        if (SerialReceiver.Instance.IsTriggerSpawnButton())
         {
             interfaceSpawnTimer += Time.deltaTime;
         }
@@ -51,7 +50,7 @@ public class CellManager : MonoBehaviour
 
         CellCore newCellCore = newCell.GetComponent<CellCore>();
 
-        newCellCore.OnCellDestroy += CellCore_OnCellDestroy;
+        newCellCore.OnCellDestroy += Cell_OnCellDestroy;
         newCell.GetComponent<CellDivision>().OnCellDivide += Cell_OnCellDivide;
 
         newCell.transform.parent = gameObject.transform;
@@ -76,7 +75,7 @@ public class CellManager : MonoBehaviour
         SpawnCell(e.secondChildPosition, e.doesSecondChildMutate, e.childHunger);
     }
 
-    private void CellCore_OnCellDestroy(object sender, System.EventArgs e)
+    private void Cell_OnCellDestroy(object sender, System.EventArgs e)
     {
         ChangeCellCount(-1);
     }

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SerialReceiver : MonoBehaviour
 {
+    public static SerialReceiver Instance { get; private set; }
+
     [Header("Serial Info")]
     [SerializeField] private string portName;
     [SerializeField] private int baudRate;
@@ -18,6 +20,11 @@ public class SerialReceiver : MonoBehaviour
     private Thread readThread;
 
     private int spawnTriggerButton;
+
+    private void Awake()
+    {
+        Instance = this;   
+    }
 
     private void Start()
     {

@@ -84,7 +84,8 @@ public class CellSteering : MonoBehaviour
 
                 break;
             case MovementState.Eating:
-                SteerTo(targetPosition); break;
+                SteerTo(targetPosition); 
+                break;
         }
     }
 

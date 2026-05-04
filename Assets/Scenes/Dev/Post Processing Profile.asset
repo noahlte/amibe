@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.383
+    m_Value: 0.292
   smoothness:
     m_OverrideState: 1
     m_Value: 0.509
@@ -44,8 +44,8 @@ MonoBehaviour:
   - {fileID: 3779751967325123225}
   - {fileID: -4414137048646482593}
   - {fileID: 7770607251430622250}
-  - {fileID: 1330355514186995015}
---- !u!114 &1330355514186995015
+  - {fileID: 815670681266680626}
+--- !u!114 &815670681266680626
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,13 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FilmGrain
-  active: 0
+  active: 1
   type:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 0.258
+    m_Value: 1
   response:
     m_OverrideState: 0
     m_Value: 0.8
@@ -88,10 +88,10 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.5
   intensity:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1.2
   scatter:
     m_OverrideState: 1
     m_Value: 0.772
@@ -135,7 +135,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: -0.2
+    m_Value: -0.25
   xMultiplier:
     m_OverrideState: 0
     m_Value: 1
