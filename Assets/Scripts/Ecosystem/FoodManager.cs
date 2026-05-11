@@ -52,6 +52,5 @@ public class FoodManager : MonoBehaviour
     public void ChangeCurrentFood(int amount)
     {
         currentFood += amount;
-        Debug.Log(currentFood);
     }
 }

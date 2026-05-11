@@ -19,7 +19,18 @@ public class SerialReceiver : MonoBehaviour
 
     private Thread readThread;
 
-    private int spawnTriggerButton;
+    private int spawnInput;
+    private int predatorInput;
+    private int preyInput;
+    private int randomInput;
+
+    private enum PortIndex
+    {
+        Spawn,
+        Prey,
+        Predator,
+        Random
+    }
 
     private void Awake()
     {
@@ -41,12 +52,16 @@ public class SerialReceiver : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(receivedStringMessage);
+        if (string.IsNullOrEmpty(receivedStringMessage)) return;
 
-        spawnTriggerButton = 
-            receivedStringMessage != null && 
-            receivedStringMessage != "" ? 
-            Convert.ToInt32(receivedStringMessage) : 0;
+        string[] decomposeMessage = receivedStringMessage.Split(',');
+
+        if (decomposeMessage.Length < 4) return;
+        
+        spawnInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Spawn]);
+        preyInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Prey]);
+        predatorInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Predator]);
+        randomInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Random]);
     }
 
     private void Read()
@@ -69,8 +84,23 @@ public class SerialReceiver : MonoBehaviour
         _serialPort.Close();
     }
 
-    public bool IsTriggerSpawnButton()
+    public bool IsSpawnInputHeld()
     {
-        return spawnTriggerButton == 1;
+        return spawnInput == 1;
+    }
+
+    public bool IsRandomInputPressed()
+    {
+        return randomInput == 1;
+    }
+
+    public bool IsPreyInputPressed()
+    {
+        return preyInput == 1;
+    }
+
+    public bool IsPredatorInputPressed()
+    {
+        return predatorInput == 1;
     }
 }

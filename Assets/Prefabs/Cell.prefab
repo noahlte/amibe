@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellRenderer
   numberOfPoints: 15
-  xIncrement: 0.5
-  yIncrement: 0.3
-  timeIncrement: 1
+  xIncrement: 0.3
+  yIncrement: 0.2
+  timeIncrement: 0.7
   lineRenderer: {fileID: 5921195761789153282}
 --- !u!114 &6907657618854597937
 MonoBehaviour:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellCore
   maxRadius: 0.3
-  minRadius: 0.2
+  minRadius: 0.25
   hungerLossPerSecond: 2
   maxHunger: 100
   seekRadius: 0.6
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d05a3f26a21044b8e68cb470bffea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellSteering
-  topSpeed: 1.5
+  topSpeed: 0.65
   xIncrement: 0.001
   yIncrement: 0.002
 --- !u!114 &7666244006777401408

@@ -649,7 +649,6 @@ GameObject:
   m_Component:
   - component: {fileID: 934563861}
   - component: {fileID: 934563860}
-  - component: {fileID: 934563862}
   m_Layer: 0
   m_Name: PostProcessingVolume
   m_TagString: Untagged
@@ -689,19 +688,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &934563862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934563859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec065e898f9edd4b9d69b562e1bed8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InterfaceSpawnVisual
-  volumeProfile: {fileID: 11400000, guid: 683a979095f5b4e499ce9f1ea7420f56, type: 2}
 --- !u!1 &955231250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,8 +1040,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.03
-      minScalar: 0.01
+      scalar: 0.05
+      minScalar: 0.02
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5570,8 +5556,7 @@ MonoBehaviour:
   baseNumberOfCell: 10
   herbivorCellPrefab: {fileID: 8244071645615119901, guid: 77e3e6953f602a24e9e8965aeaf7f8b8, type: 3}
   predatorCellPrefab: {fileID: 1168074760139277900, guid: 0a03816713df27e479b0723e8ebc3071, type: 3}
-  timeBeforeSpawn: 1.5
-  forceEjectionSpeed: 100
+  timeBeforeSpawn: 10
 --- !u!4 &1174743215
 Transform:
   m_ObjectHideFlags: 0

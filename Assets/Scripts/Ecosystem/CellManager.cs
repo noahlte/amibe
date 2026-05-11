@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CellManager : MonoBehaviour
 {
+    public static CellManager Instance { get; private set; }
+
     [Header("Cell Base Spawner")]
     [SerializeField] private int baseNumberOfCell = 10;
     [SerializeField] private GameObject herbivorCellPrefab;
@@ -9,11 +11,17 @@ public class CellManager : MonoBehaviour
 
     [Header("Cell Interface Spawner")]
     [SerializeField] private float timeBeforeSpawn = 10f;
+    [SerializeField] private int forceEjectionSpeed = 100;
     private float interfaceSpawnTimer = 0f;
 
     private int cellCount;
 
     private float cameraWidth, cameraHeight;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -27,20 +35,38 @@ public class CellManager : MonoBehaviour
 
     private void Update()
     {
-        if (SerialReceiver.Instance.IsTriggerSpawnButton())
+        if (SerialReceiver.Instance.IsSpawnInputHeld())
         {
             interfaceSpawnTimer += Time.deltaTime;
+        } else
+        {
+            interfaceSpawnTimer = 0;
         }
 
         if (interfaceSpawnTimer > timeBeforeSpawn)
         {
+            bool hasMutate;
+
+            //Debug.Log(-cameraHeight);
             Vector3 spawnPosition = new Vector3(0, -cameraHeight, 0);
-            SpawnCell(spawnPosition);
+
+            if (SerialReceiver.Instance.IsRandomInputPressed())
+            {
+                int rand = Random.Range(0, 3);
+                hasMutate = rand == 2;
+            }
+            else
+            {
+                hasMutate = SerialReceiver.Instance.IsPredatorInputPressed();
+            }
+
+            GameObject newCell = SpawnCell(spawnPosition, hasMutate);
+            newCell.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, forceEjectionSpeed, 0));
             interfaceSpawnTimer = 0f;
         }
     }
 
-    public void SpawnCell(Vector3 position, bool hasMutate = false, float hungerToSet = 0f)
+    public GameObject SpawnCell(Vector3 position, bool hasMutate = false, float hungerToSet = 0f)
     {
         GameObject newCell;
 
@@ -61,12 +87,24 @@ public class CellManager : MonoBehaviour
         }
 
         ChangeCellCount(1);
+
+        return newCell;
     }
 
     public void ChangeCellCount(int amount)
     {
         cellCount += amount;
         Debug.Log($"Cell count is now {cellCount}");
+    }
+
+    public float GetSpawnTimer()
+    {
+        return interfaceSpawnTimer;
+    }
+
+    public float GetMawSpawnTimer()
+    {
+        return timeBeforeSpawn;
     }
 
     private void Cell_OnCellDivide(object sender, CellDivision.OnCellDivideArgs e)
