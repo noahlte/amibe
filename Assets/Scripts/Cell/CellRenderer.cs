@@ -62,7 +62,7 @@ public class CellRenderer : MonoBehaviour
 
         for (int i = 0; i < numberOfPoints; i++)
         {
-            float pointAngle = ((float)i / (float)numberOfPoints) * (2 * Mathf.PI);
+            float pointAngle = (float)i / numberOfPoints * (2 * Mathf.PI);
             float distance = Mathf.PerlinNoise(xoff, yoff);
             distance = Utils.Map(distance, 0f, 1f, minRadius, cellCore.GetRadius());
 

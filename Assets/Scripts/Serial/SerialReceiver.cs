@@ -39,9 +39,16 @@ public class SerialReceiver : MonoBehaviour
 
     private void Start()
     {
+        _continue = false;
+
         readThread = new Thread(Read);
 
         _serialPort = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
+
+        if (_serialPort.IsOpen)
+        {
+            _serialPort.Close();
+        }
 
         _serialPort.ReadTimeout = 500;
 
@@ -78,10 +85,13 @@ public class SerialReceiver : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
         _continue = false;
-        _serialPort.Close();
+        if (_serialPort != null && _serialPort.IsOpen)
+        {
+            _serialPort.Close();
+        }
     }
 
     public bool IsSpawnInputHeld()

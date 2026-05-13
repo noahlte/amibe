@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodManager
   maxFood: 200
-  spawnRate: 0.05
+  spawnRate: 0.1
   foodPrefab: {fileID: 4793597982869927218, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
   foodCore: {fileID: -7436033798094823796, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
 --- !u!4 &269067850
@@ -426,12 +426,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269067848}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1823427205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367505945
 GameObject:
@@ -6255,7 +6255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1823427205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1537253200
 GameObject:
@@ -6467,7 +6467,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 269067850}
+  - {fileID: 1174743215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831666716
@@ -6527,11 +6529,9 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 955231253}
-  - {fileID: 934563861}
   - {fileID: 1823427205}
-  - {fileID: 269067850}
-  - {fileID: 1174743215}
   - {fileID: 1805550484}
+  - {fileID: 934563861}
   - {fileID: 1537253201}
   - {fileID: 237012916}
   - {fileID: 1623095003}
