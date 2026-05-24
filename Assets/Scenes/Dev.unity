@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d284ea5407ab9488f00dfab58ffb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodManager
-  maxFood: 200
-  spawnRate: 0.05
+  maxFood: 300
+  spawnRate: 0.01
   foodPrefab: {fileID: 4793597982869927218, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
   foodCore: {fileID: -7436033798094823796, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
 --- !u!4 &269067850
@@ -6420,7 +6420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7c986f2c9faab489fdaeff7b740fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SerialReceiver
-  portName: COM7
+  portName: COM4
   baudRate: 9600
   testSprite: {fileID: 550617108}
 --- !u!4 &1805550484
