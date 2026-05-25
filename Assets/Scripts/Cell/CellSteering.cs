@@ -1,3 +1,5 @@
+// TODO: Refactor du système de mouvement, besoins de faire en sorte que la cellule ne sort pas de l'écran
+
 using UnityEngine;
 
 public class CellSteering : MonoBehaviour
@@ -9,11 +11,14 @@ public class CellSteering : MonoBehaviour
     [SerializeField] private float topSpeed = 0.2f;
     [SerializeField] private float xIncrement = 0.2f;
     [SerializeField] private float yIncrement = 0.1f;
-
+    [SerializeField] private float offsetValue = 0.02f;
+    private float minSeekingDistance = 1;
+    private float maxSeekingDistance = 3;
+    
     private Vector3 velocity;
-    private Vector3 acceleration;
 
     private ICellState cellState;
+    private CellCore cellCore;
 
     private float xoff1;
     private float yoff1;
@@ -33,6 +38,7 @@ public class CellSteering : MonoBehaviour
     private void Awake()
     {
         cellState = gameObject.GetComponent<ICellState>();
+        cellCore = gameObject.GetComponent<CellCore>();
     }
 
     private void Start()
@@ -44,13 +50,14 @@ public class CellSteering : MonoBehaviour
         yoff2 = Random.Range(0, 10000);
 
         velocity = Vector3.zero;
-        acceleration = Vector3.zero;
 
         (cameraWidth, cameraHeight) = Utils.GetCameraBounds();
 
         cellState.OnTargetFound += CellState_OnTargetFound;
         cellState.OnTargetLost += CellState_OnTargetLost;
         cellState.OnTargetEat += CellState_OnTargetEat;
+
+        ChooseNewSeekingTarget();
 
         movementState = MovementState.Seeking;
     }
@@ -60,20 +67,21 @@ public class CellSteering : MonoBehaviour
         movementState = MovementState.Eating;
         targetPosition = e.targetPosition;
     }
+    
     private void CellState_OnTargetLost(object sender, System.EventArgs e)
     {
+        ChooseNewSeekingTarget();
         movementState = MovementState.Seeking;
     }
 
     private void CellState_OnTargetEat(object sender, System.EventArgs e)
     {
+        ChooseNewSeekingTarget();
         movementState = MovementState.Seeking;
     }
 
     private void Update()
     {
-        CheckEdges();
-
         switch (movementState)
         {
             case MovementState.Seeking:
@@ -93,6 +101,15 @@ public class CellSteering : MonoBehaviour
     {
         Vector3 direction = target - transform.position;
         direction.Normalize();
+
+        Vector3 perpendicularVector = new(-direction.y, direction.x, 0);
+
+        float offset = Utils.Map(Mathf.PerlinNoise(xoff1, yoff1), 0f, 1f, -offsetValue, offsetValue);
+        
+        perpendicularVector *= offset;
+
+        transform.position += perpendicularVector * Time.deltaTime;
+
         MoveCell(direction);
     }
 
@@ -109,12 +126,28 @@ public class CellSteering : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
-    private void CheckEdges()
+    private void SeekSteering()
     {
-        if (transform.position.x > cameraWidth) transform.position = new Vector3(-cameraWidth, transform.position.y, 0);
-        if (transform.position.x < -cameraWidth) transform.position = new Vector3(cameraWidth, transform.position.y, 0);
-        if (transform.position.y > cameraHeight) transform.position = new Vector3(transform.position.x, -cameraHeight, 0);
-        if (transform.position.y < -cameraHeight) transform.position = new Vector3(transform.position.x, cameraHeight, 0);
+        if (Vector3.Distance(transform.position, targetPosition) < cellCore.GetRadius())
+        {
+            ChooseNewSeekingTarget();
+        } 
+        
+        SteerTo(targetPosition);
+    }
+
+    private void ChooseNewSeekingTarget()
+    {
+        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+        float distance = Random.Range(minSeekingDistance, maxSeekingDistance);
+
+        float targetX = transform.position.x + distance * Mathf.Cos(angle);
+        float targetY = transform.position.y + distance * Mathf.Sin(angle);
+
+        targetX = Mathf.Clamp(targetX, -cameraWidth, cameraWidth);
+        targetY = Mathf.Clamp(targetY, -cameraHeight, cameraHeight);
+
+        targetPosition = new Vector3(targetX, targetY, 0);
     }
 
     private (float, float) IncrementOffset(float xoff, float yoff)
@@ -123,18 +156,5 @@ public class CellSteering : MonoBehaviour
         yoff += yIncrement;
 
         return (xoff, yoff);
-    }
-
-    private void SeekSteering()
-    {
-        float xDirection = Mathf.PerlinNoise(xoff1, yoff1);
-        float yDirection = Mathf.PerlinNoise(xoff2, yoff2);
-
-        xDirection = Utils.Map(xDirection, 0f, 1f, -1f, 1f);
-        yDirection = Utils.Map(yDirection, 0f, 1f, -1f, 1f);
-
-        acceleration = new Vector3(xDirection, yDirection, 0);
-        
-        MoveCell(acceleration);
     }
 }

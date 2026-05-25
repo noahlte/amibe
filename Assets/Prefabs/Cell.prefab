@@ -90,6 +90,7 @@ MonoBehaviour:
   topSpeed: 0.65
   xIncrement: 0.001
   yIncrement: 0.002
+  offsetValue: 0.2
 --- !u!114 &7666244006777401408
 MonoBehaviour:
   m_ObjectHideFlags: 0
