@@ -11,9 +11,9 @@ public class CellSteering : MonoBehaviour
     [SerializeField] private float topSpeed = 0.2f;
     [SerializeField] private float xIncrement = 0.2f;
     [SerializeField] private float yIncrement = 0.1f;
+    [SerializeField] private float offsetValue = 0.02f;
     private float minSeekingDistance = 1;
     private float maxSeekingDistance = 3;
-    private Vector3 seekingTarget;
     
     private Vector3 velocity;
 
@@ -70,11 +70,13 @@ public class CellSteering : MonoBehaviour
     
     private void CellState_OnTargetLost(object sender, System.EventArgs e)
     {
+        ChooseNewSeekingTarget();
         movementState = MovementState.Seeking;
     }
 
     private void CellState_OnTargetEat(object sender, System.EventArgs e)
     {
+        ChooseNewSeekingTarget();
         movementState = MovementState.Seeking;
     }
 
@@ -99,6 +101,15 @@ public class CellSteering : MonoBehaviour
     {
         Vector3 direction = target - transform.position;
         direction.Normalize();
+
+        Vector3 perpendicularVector = new(-direction.y, direction.x, 0);
+
+        float offset = Utils.Map(Mathf.PerlinNoise(xoff1, yoff1), 0f, 1f, -offsetValue, offsetValue);
+        
+        perpendicularVector *= offset;
+
+        transform.position += perpendicularVector * Time.deltaTime;
+
         MoveCell(direction);
     }
 
@@ -115,30 +126,14 @@ public class CellSteering : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
-    private (float, float) IncrementOffset(float xoff, float yoff)
-    {
-        xoff += xIncrement;
-        yoff += yIncrement;
-
-        return (xoff, yoff);
-    }
-
     private void SeekSteering()
     {
-        if (Vector3.Distance(transform.position, seekingTarget) < cellCore.GetRadius())
+        if (Vector3.Distance(transform.position, targetPosition) < cellCore.GetRadius())
         {
             ChooseNewSeekingTarget();
         } 
-
-        Vector3 normalizeSeekingTarget = seekingTarget;
-        normalizeSeekingTarget.Normalize();
-
-        float offsetX = Utils.Map(Mathf.PerlinNoise(xoff1, yoff2), 0f, 1f, -0.01f, 0.01f);
-        float offsetY = Utils.Map(Mathf.PerlinNoise(xoff2, yoff2), 0f, 1f, -0.01f, 0.01f);
-
-        transform.position += new Vector3(offsetX, offsetY, 0);
         
-        SteerTo(seekingTarget);
+        SteerTo(targetPosition);
     }
 
     private void ChooseNewSeekingTarget()
@@ -152,6 +147,14 @@ public class CellSteering : MonoBehaviour
         targetX = Mathf.Clamp(targetX, -cameraWidth, cameraWidth);
         targetY = Mathf.Clamp(targetY, -cameraHeight, cameraHeight);
 
-        seekingTarget = new Vector3(targetX, targetY, 0);
+        targetPosition = new Vector3(targetX, targetY, 0);
+    }
+
+    private (float, float) IncrementOffset(float xoff, float yoff)
+    {
+        xoff += xIncrement;
+        yoff += yIncrement;
+
+        return (xoff, yoff);
     }
 }
