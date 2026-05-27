@@ -6240,8 +6240,9 @@ MonoBehaviour:
   baseNumberOfCell: 10
   herbivorCellPrefab: {fileID: 8244071645615119901, guid: 77e3e6953f602a24e9e8965aeaf7f8b8, type: 3}
   predatorCellPrefab: {fileID: 1168074760139277900, guid: 0a03816713df27e479b0723e8ebc3071, type: 3}
+  omnivorCellPrefab: {fileID: 3470737403884643186, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
   timeBeforeSpawn: 1.5
-  forceEjectionSpeed: 100
+  forceEjectionSpeed: 50
 --- !u!4 &1174743215
 Transform:
   m_ObjectHideFlags: 0

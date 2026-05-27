@@ -8,6 +8,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] private int baseNumberOfCell = 10;
     [SerializeField] private GameObject herbivorCellPrefab;
     [SerializeField] private GameObject predatorCellPrefab;
+    [SerializeField] private GameObject omnivorCellPrefab;
 
     [Header("Cell Interface Spawner")]
     [SerializeField] private float timeBeforeSpawn = 10f;
@@ -45,22 +46,11 @@ public class CellManager : MonoBehaviour
 
         if (interfaceSpawnTimer > timeBeforeSpawn)
         {
-            bool hasMutate;
-
             //Debug.Log(-cameraHeight);
             Vector3 spawnPosition = new Vector3(0, -cameraHeight, 0);
 
-            if (SerialReceiver.Instance.IsRandomInputPressed())
-            {
-                int rand = Random.Range(0, 3);
-                hasMutate = rand == 2;
-            }
-            else
-            {
-                hasMutate = SerialReceiver.Instance.IsPredatorInputPressed();
-            }
+            GameObject newCell = Instantiate(omnivorCellPrefab, spawnPosition, Quaternion.identity);
 
-            GameObject newCell = SpawnCell(spawnPosition, hasMutate);
             newCell.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, forceEjectionSpeed, 0));
             interfaceSpawnTimer = 0f;
         }
