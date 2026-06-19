@@ -47,12 +47,20 @@ public class CellManager : MonoBehaviour
         if (interfaceSpawnTimer > timeBeforeSpawn)
         {
             //Debug.Log(-cameraHeight);
-            Vector3 spawnPosition = new Vector3(0, -cameraHeight, 0);
+            Vector3 spawnPosition = new Vector3(0, -cameraHeight + 1f, 0);
 
             GameObject newCell = Instantiate(omnivorCellPrefab, spawnPosition, Quaternion.identity);
 
             newCell.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, forceEjectionSpeed, 0));
             interfaceSpawnTimer = 0f;
+        }
+
+        if (cellCount == 0)
+        {
+            for (int i = 0; i < baseNumberOfCell; i++)
+            {
+                SpawnCell(new Vector3(Random.Range(-cameraWidth, cameraWidth), Random.Range(-cameraHeight, cameraHeight), 0));
+            }
         }
     }
 

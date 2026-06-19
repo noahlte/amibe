@@ -3,7 +3,7 @@ using UnityEngine;
 public class FoodManager : MonoBehaviour
 {
     [Header("Food Spawner")]
-    [SerializeField] private int maxFood = 100;
+    [SerializeField] private int maxFood;
     [SerializeField] private float spawnRate = 1f;
     [SerializeField] private GameObject foodPrefab;
     [SerializeField] private FoodCore foodCore;

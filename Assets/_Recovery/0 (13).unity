@@ -284,9 +284,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: a600ce16c1d54244386ae59d979e4bbd, type: 3}
+  m_Resource: {fileID: 8300000, guid: 77e4484a68884704e87a8e01ed8e4a26, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d284ea5407ab9488f00dfab58ffb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodManager
-  maxFood: 1000
+  maxFood: 300
   spawnRate: 0.01
   foodPrefab: {fileID: 4793597982869927218, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
   foodCore: {fileID: -7436033798094823796, guid: 4a4760fab0f986644bd75d6b22390f4a, type: 3}
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934563859}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bec065e898f9edd4b9d69b562e1bed8c, type: 3}
   m_Name: 
@@ -6241,7 +6241,7 @@ MonoBehaviour:
   herbivorCellPrefab: {fileID: 8244071645615119901, guid: 77e3e6953f602a24e9e8965aeaf7f8b8, type: 3}
   predatorCellPrefab: {fileID: 1168074760139277900, guid: 0a03816713df27e479b0723e8ebc3071, type: 3}
   omnivorCellPrefab: {fileID: 3470737403884643186, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
-  timeBeforeSpawn: 0.75
+  timeBeforeSpawn: 1.5
   forceEjectionSpeed: 50
 --- !u!4 &1174743215
 Transform:
@@ -6421,7 +6421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7c986f2c9faab489fdaeff7b740fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SerialReceiver
-  portName: COM3
+  portName: COM4
   baudRate: 9600
   testSprite: {fileID: 550617108}
 --- !u!4 &1805550484

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Omni Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 5921195761789153282, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 41a83ec9384c3cb42a51aac60b6f421f, type: 2}
     - target: {fileID: 7727798084024861864, guid: a4ebcce7dc498f7419816b7972cb417e, type: 3}
       propertyPath: timeIncrement
       value: 1.2

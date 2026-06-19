@@ -6241,7 +6241,7 @@ MonoBehaviour:
   herbivorCellPrefab: {fileID: 8244071645615119901, guid: 77e3e6953f602a24e9e8965aeaf7f8b8, type: 3}
   predatorCellPrefab: {fileID: 1168074760139277900, guid: 0a03816713df27e479b0723e8ebc3071, type: 3}
   omnivorCellPrefab: {fileID: 3470737403884643186, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
-  timeBeforeSpawn: 0.75
+  timeBeforeSpawn: 1.5
   forceEjectionSpeed: 50
 --- !u!4 &1174743215
 Transform:
@@ -6520,6 +6520,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuScript
   restartButton: {fileID: 432555249}
   quitButton: {fileID: 367505947}
+--- !u!1001 &1849003630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.025645167
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.37759417
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901135511964915263, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470737403884643186, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
+      propertyPath: m_Name
+      value: Omni Cell
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 171b2fb3d11774545b17a75d290a6634, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6537,3 +6594,4 @@ SceneRoots:
   - {fileID: 237012916}
   - {fileID: 1623095003}
   - {fileID: 1135317012}
+  - {fileID: 1849003630}
