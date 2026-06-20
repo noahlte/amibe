@@ -6,6 +6,8 @@ Amibe is an interactive installation exploring human curiosity and its impact on
 
 The ecosystem lives and evolves on its own. It does not need human intervention. Yet, through a physical interface, the visitor can introduce their own cell into the system, an omnivore that disrupts the balance that had settled. The project asks a simple question: why do we interfere with something that was working fine without us?
 
+![A video of the ecosystem](example.gif)
+
 ---
 
 ## How it works
