@@ -14,22 +14,19 @@ The ecosystem lives and evolves on its own. It does not need human intervention.
 
 The simulation runs in real time using Unity 6 (URP 2D). Each cell is an autonomous agent with its own energy, behavior and lifespan. Prey seek food, divide when full and can mutate into predators upon division. Predators hunt prey. If the food runs out, everything collapses.
 
-The visitor interacts through a physical box equipped with a copper plate. By holding their hand on it, they charge the sending of a new cell into the ecosystem. A switch lets them choose between a prey or a predator cell.
+The visitor interacts through a physical box equipped with a copper plate. By holding their hand on it, they charge the sending of an omnivore cell into the ecosystem. There is no choice to make, the act itself is the perturbation.
 
-The interface communicates with the simulation via a serial connection (Microbit or Arduino). The expected serial format is a comma-separated string of 0s and 1s on one line.
+The interface communicates with the simulation via a serial connection (Microbit or Arduino). The expected serial format is a single 0 or 1 sent on one line.
 
 Example of expected serial input:
 
 ```
-1,0,1,0
+1
 ```
 
-The four values correspond to the following inputs in order:
+This single value corresponds to the hand sensor (spawn trigger). A value of 1 means the hand is currently on the plate, 0 means it is not.
 
-- Hand sensor (spawn trigger)
-- Prey selected
-- Predator selected
-- Random selected
+The Microbit programs used for this project can be found in the `microbit` folder.
 
 ---
 

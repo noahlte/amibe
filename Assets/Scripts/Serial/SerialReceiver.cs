@@ -20,16 +20,10 @@ public class SerialReceiver : MonoBehaviour
     private Thread readThread;
 
     private int spawnInput;
-    private int predatorInput;
-    private int preyInput;
-    private int randomInput;
 
     private enum PortIndex
     {
         Spawn,
-        Prey,
-        Predator,
-        Random
     }
 
     private void Awake()
@@ -66,9 +60,6 @@ public class SerialReceiver : MonoBehaviour
         if (decomposeMessage.Length < 4) return;
         
         spawnInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Spawn]);
-        preyInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Prey]);
-        predatorInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Predator]);
-        randomInput = Convert.ToInt32(decomposeMessage[(int)PortIndex.Random]);
     }
 
     private void Read()
@@ -97,20 +88,5 @@ public class SerialReceiver : MonoBehaviour
     public bool IsSpawnInputHeld()
     {
         return spawnInput == 1;
-    }
-
-    public bool IsRandomInputPressed()
-    {
-        return randomInput == 1;
-    }
-
-    public bool IsPreyInputPressed()
-    {
-        return preyInput == 1;
-    }
-
-    public bool IsPredatorInputPressed()
-    {
-        return predatorInput == 1;
     }
 }
